@@ -1,5 +1,10 @@
 import { useEffect, useState } from 'react'
-import { API_BASE_URL, extractRows } from '../api'
+import { extractRows } from '../api'
+
+const codespaceName = import.meta.env.VITE_CODESPACE_NAME
+const API_BASE_URL = codespaceName
+  ? `https://${codespaceName}-8000.app.github.dev`
+  : 'http://localhost:8000'
 
 export default function Teams() {
   const [teams, setTeams] = useState([])

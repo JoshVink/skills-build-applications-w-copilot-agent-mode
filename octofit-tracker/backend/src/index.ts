@@ -1,5 +1,6 @@
 import express from 'express';
 import db from './config/database';
+import apiRoutes from './routes/api';
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -19,6 +20,8 @@ db.once('open', () => {
 app.get('/api/', (_req, res) => {
   res.json({ message: 'OctoFit Tracker API', baseUrl });
 });
+
+app.use('/api', apiRoutes);
 
 app.listen(PORT, () => {
   console.log(`OctoFit backend running at ${baseUrl}`);

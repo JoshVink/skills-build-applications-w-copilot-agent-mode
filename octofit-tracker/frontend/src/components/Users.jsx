@@ -2,9 +2,6 @@ import { useEffect, useState } from 'react'
 import { extractRows } from '../api'
 
 const codespaceName = import.meta.env.VITE_CODESPACE_NAME
-const API_BASE_URL = codespaceName
-  ? `https://${codespaceName}-8000.app.github.dev`
-  : 'http://localhost:8000'
 
 export default function Users() {
   const [users, setUsers] = useState([])
@@ -12,7 +9,7 @@ export default function Users() {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    fetch(`${API_BASE_URL}/api/users/`)
+    fetch(codespaceName ? `https://${codespaceName}-8000.app.github.dev/api/users/` : 'http://localhost:8000/api/users/')
       .then((r) => {
         if (!r.ok) throw new Error(`HTTP ${r.status}`)
         return r.json()

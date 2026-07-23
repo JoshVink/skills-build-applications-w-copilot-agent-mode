@@ -2,9 +2,6 @@ import { useEffect, useState } from 'react'
 import { extractRows } from '../api'
 
 const codespaceName = import.meta.env.VITE_CODESPACE_NAME
-const API_BASE_URL = codespaceName
-  ? `https://${codespaceName}-8000.app.github.dev`
-  : 'http://localhost:8000'
 
 const difficultyBadge = {
   Beginner: 'bg-success',
@@ -18,7 +15,7 @@ export default function Workouts() {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    fetch(`${API_BASE_URL}/api/workouts/`)
+    fetch(codespaceName ? `https://${codespaceName}-8000.app.github.dev/api/workouts/` : 'http://localhost:8000/api/workouts/')
       .then((r) => {
         if (!r.ok) throw new Error(`HTTP ${r.status}`)
         return r.json()

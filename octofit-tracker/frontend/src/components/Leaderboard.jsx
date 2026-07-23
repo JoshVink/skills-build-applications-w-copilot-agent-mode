@@ -2,9 +2,6 @@ import { useEffect, useState } from 'react'
 import { extractRows } from '../api'
 
 const codespaceName = import.meta.env.VITE_CODESPACE_NAME
-const API_BASE_URL = codespaceName
-  ? `https://${codespaceName}-8000.app.github.dev`
-  : 'http://localhost:8000'
 
 const medalColors = ['text-warning', 'text-secondary', 'text-danger']
 
@@ -14,7 +11,7 @@ export default function Leaderboard() {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    fetch(`${API_BASE_URL}/api/leaderboard/`)
+    fetch(codespaceName ? `https://${codespaceName}-8000.app.github.dev/api/leaderboard/` : 'http://localhost:8000/api/leaderboard/')
       .then((r) => {
         if (!r.ok) throw new Error(`HTTP ${r.status}`)
         return r.json()

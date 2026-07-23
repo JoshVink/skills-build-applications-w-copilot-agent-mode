@@ -12,7 +12,7 @@ const baseUrl = codespaceName
 
 app.use(express.json());
 
-// Ensure DB connection is established
+// Ensure DB connection is established.
 db.once('open', () => {
   console.log('MongoDB connection ready');
 });
